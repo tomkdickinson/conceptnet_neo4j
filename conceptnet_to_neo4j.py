@@ -28,9 +28,10 @@ for file in os.listdir("%s/assertions/" % conceptnet_location):
             rel = row[1]
             start = row[2]
             end = row[3]
-            nodes.add(start)
-            nodes.add(end)
-            relationships.append([start, end, rel])
+            if start.starts_with("/c/") and end.starts_with("/c/") and rel.starts_with("/r/"):
+                nodes.add(start)
+                nodes.add(end)
+                relationships.append([start, end, rel])
 
 with open("nodes.csv", "w") as f:
     writer = csv.writer(f)
